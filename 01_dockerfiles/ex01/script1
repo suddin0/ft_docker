@@ -1,0 +1,16 @@
+#!/bin/bash
+bunzip2 teamspeak3-server_linux_amd64-3.0.13.8.tar.bz2
+tar -xf teamspeak3-server_linux_amd64-3.0.13.8.tar
+cd teamspeak3-server_linux_amd64
+groupadd -g 503 teamspeak
+mkdir /teamspeak3
+useradd -u 503 -g 503   teamspeak
+chown -R teamspeak:teamspeak /teamspeak3
+
+#Creaate the [run_st3_server.sh] script to run the teamspeak 3 server deamon
+echo "cd teamspeak3-server_linux_amd64" >> /run_st3_server.sh
+echo "export TS3SERVER_LICENSE=accept" >> /run_st3_server.sh
+echo "sh ts3server_minimal_runscript.sh createinifile=1" >> /run_st3_server.sh
+echo "echo \"HELLO THERE\"" >> run_st3_server.sh
+echo "\`sh ts3server_startscript.sh start &> log\`&" >> run_st3_server.sh
+echo "cat log" >> run_st3_server.sh
